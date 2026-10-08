@@ -1,0 +1,1261 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#FBF5F5">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="צלחת">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<style>:root{color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px);background:#FBF5F5}@media (prefers-color-scheme:dark){html{background:#1B1117}}body{margin:0;padding:0}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style>
+</head>
+<body>
+<title>צלחת</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Bellefair&family=Bodoni+Moda:opsz,wght@6..96,400..700&display=swap">
+<style>
+/* Layout: one phone-width column. Today's intake is a porcelain plate whose beaded rim fills toward the goal; capture and results rise as sheets from below. */
+:root{
+  --porcelain:#FBF5F5;
+  --paper:#FFFFFF;
+  --ink:#33172A;
+  --muted:#86697A;
+  --line:#EEDDE2;
+  --bead:#E2C6CF;
+  --rose:#B03F66;
+  --rose-wash:#F8E7EC;
+  --apricot:#C98237;
+  --celadon:#4F8C71;
+  --water:#CFE6DB;
+  --on-ink:#FBF5F5;
+  --scrim:rgba(51,23,42,.36);
+  --shadow:0 1px 2px rgba(51,23,42,.05),0 22px 44px -22px rgba(51,23,42,.32);
+  --f-display:"Bellefair","Bodoni Moda",Georgia,"Times New Roman",serif;
+  --f-num:"Bodoni Moda","Bellefair",Georgia,"Times New Roman",serif;
+  --f-body:"Assistant","Segoe UI","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --porcelain:#1B1117;--paper:#271A22;--ink:#F7EAF0;--muted:#B99CAB;--line:#3B2833;--bead:#50374A;
+    --rose:#E88AA8;--rose-wash:#3A2331;--apricot:#E8AE70;--celadon:#8CC4AA;--water:#2E4A3F;--on-ink:#1B1117;
+    --scrim:rgba(0,0,0,.55);--shadow:0 1px 2px rgba(0,0,0,.35),0 22px 44px -22px rgba(0,0,0,.8);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --porcelain:#1B1117;--paper:#271A22;--ink:#F7EAF0;--muted:#B99CAB;--line:#3B2833;--bead:#50374A;
+  --rose:#E88AA8;--rose-wash:#3A2331;--apricot:#E8AE70;--celadon:#8CC4AA;--water:#2E4A3F;--on-ink:#1B1117;
+  --scrim:rgba(0,0,0,.55);--shadow:0 1px 2px rgba(0,0,0,.35),0 22px 44px -22px rgba(0,0,0,.8);
+  color-scheme:dark;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--porcelain);color:var(--ink);font:16px/1.5 var(--f-body);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+.num{font-family:var(--f-num);font-variant-numeric:lining-nums tabular-nums;font-optical-sizing:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{text-wrap:balance}
+p{margin:0}
+
+.app{max-width:480px;margin-inline:auto;padding-inline:18px;padding-block:16px 48px;display:flex;flex-direction:column;gap:30px}
+
+/* header */
+.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.wordmark{font-family:var(--f-display);font-weight:400;font-size:2.6rem;line-height:.95;margin:0;letter-spacing:.01em}
+.daynav{display:flex;align-items:center;gap:2px;margin-top:8px;color:var(--muted);font-size:.95rem;margin-inline-start:-6px}
+.nav-btn{width:30px;height:30px;border:0;background:none;display:grid;place-items:center;color:var(--muted);border-radius:50%}
+.nav-btn:disabled{opacity:.25;cursor:default}
+.streak{display:inline-block;margin-top:6px;font-size:.8rem;color:var(--rose);letter-spacing:.02em}
+.icon-btn{width:42px;height:42px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:grid;place-items:center;color:var(--ink)}
+.icon-btn.sm{width:36px;height:36px}
+
+/* the plate */
+.hero{display:flex;flex-direction:column;gap:26px}
+.plate-wrap{position:relative;width:min(78vw,300px);aspect-ratio:1;max-width:100%;margin-inline:auto}
+.plate-wrap::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--paper);box-shadow:var(--shadow)}
+.plate{position:absolute;inset:0;width:100%;height:100%;display:block}
+.plate .beads{stroke:var(--bead);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:0 9.27}
+.plate .track{stroke:var(--line);stroke-width:7}
+.plate .progress{stroke:var(--rose);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .9s cubic-bezier(.2,.7,.2,1)}
+.plate-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2px;padding:22%}
+.eyebrow-s{font-size:.78rem;color:var(--muted);letter-spacing:.06em}
+.kcal{font-size:clamp(2.7rem,13vw,3.5rem);line-height:1.02;font-weight:500}
+.kcal-goal{font-size:.86rem;color:var(--muted)}
+.kcal-left{font-size:.9rem;color:var(--rose);font-weight:600;margin-top:4px}
+
+.macros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.macro{display:flex;flex-direction:column;gap:6px;min-width:0}
+.m-label{font-size:.84rem;color:var(--muted);display:flex;align-items:center;gap:6px}
+.m-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c);flex:none}
+.m-val{font-size:.85rem;color:var(--muted);white-space:nowrap}
+.m-val b{font-family:var(--f-num);font-weight:500;font-size:1.45rem;color:var(--ink);font-variant-numeric:lining-nums tabular-nums}
+.bar{height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--c);border-radius:3px;transition:width .8s cubic-bezier(.2,.7,.2,1)}
+.k-protein{--c:var(--rose)} .k-carbs{--c:var(--apricot)} .k-fat{--c:var(--celadon)}
+
+/* capture */
+.capture{display:flex;flex-direction:column;gap:10px}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;min-height:56px;padding:0 22px;border-radius:999px;background:var(--ink);color:var(--on-ink);border:0;font-size:1.06rem;font-weight:600;width:100%}
+.cta:disabled{opacity:.45;cursor:default}
+.cta-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ghost{min-height:48px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:center;gap:8px;font-weight:500;color:var(--ink)}
+.ghost:disabled{opacity:.45;cursor:default}
+.engine-note{font-size:.82rem;color:var(--muted);text-align:center;margin-top:2px}
+.engine-note.warn{color:var(--rose)}
+
+/* sections */
+.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:8px}
+h2.sec{font-family:var(--f-display);font-weight:400;font-size:1.55rem;margin:0}
+.count{font-size:.85rem;color:var(--muted)}
+.example-note{font-size:.84rem;color:var(--muted);background:var(--rose-wash);border-radius:14px;padding:10px 14px;margin-bottom:6px}
+
+.meals{list-style:none;margin:0;padding:0}
+.meals li + li{border-top:1px solid var(--line)}
+.meal{display:flex;align-items:center;gap:14px;width:100%;padding:13px 0;background:none;border:0;text-align:start;color:var(--ink)}
+.thumb{width:54px;height:54px;border-radius:50%;overflow:hidden;flex:none;background:var(--rose-wash);display:grid;place-items:center;color:var(--rose);box-shadow:0 0 0 3px var(--paper),0 0 0 4px var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.meal-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.meal-name{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meal-meta{font-size:.84rem;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.tag{font-size:.72rem;padding:1px 8px;border-radius:999px;background:var(--rose-wash);color:var(--rose);font-weight:600}
+.meal-kcal{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1;flex:none}
+.meal-kcal .num{font-size:1.35rem}
+.meal-kcal small{font-size:.72rem;color:var(--muted)}
+.empty{color:var(--muted);font-size:.92rem;padding:14px 0;border-top:1px solid var(--line)}
+
+.glasses{display:flex;gap:4px;flex-wrap:wrap}
+.glass{width:34px;height:42px;border:0;background:none;padding:2px;color:var(--bead);border-radius:8px}
+.glass svg{width:100%;height:100%;display:block}
+.glass .g-body{stroke:currentColor;fill:none}
+.glass .g-fill{fill:transparent;transition:fill .25s}
+.glass.on{color:var(--celadon)}
+.glass.on .g-fill{fill:var(--water)}
+
+.foot{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.5}
+
+/* sheets */
+.sheet{position:fixed;inset:0;z-index:30;display:flex;align-items:flex-end;justify-content:center;background:var(--scrim)}
+.sheet-panel{position:relative;width:100%;max-width:520px;max-height:calc(100% - 20px - env(safe-area-inset-top,0px));overflow-y:auto;overscroll-behavior:contain;background:var(--paper);color:var(--ink);border-radius:28px 28px 0 0;padding:0 20px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:18px;animation:rise .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes rise{from{transform:translateY(24px);opacity:.4}to{transform:none;opacity:1}}
+.sheet-bar{display:flex;align-items:flex-start;justify-content:center;position:sticky;top:0;z-index:2;background:var(--paper);min-height:56px;padding-top:6px;margin-block:0 -10px;margin-inline:-4px}
+.grip{width:38px;height:4px;border-radius:4px;background:var(--line);margin-top:6px}
+.sheet-bar .icon-btn{position:absolute;inset-inline-end:4px;top:10px}
+.sheet-title{font-family:var(--f-display);font-weight:400;font-size:1.8rem;line-height:1.1;margin:0}
+.state{display:flex;flex-direction:column;gap:18px}
+.fine{font-size:.82rem;color:var(--muted);line-height:1.5}
+
+.photo-plate{position:relative;width:min(62vw,236px);aspect-ratio:1;max-width:100%;margin:4px auto 0;display:grid;place-items:center;color:var(--rose)}
+.photo-plate::before{content:"";position:absolute;inset:0;border-radius:50%;background:var(--paper);box-shadow:var(--shadow)}
+.photo-plate svg.rim{position:absolute;inset:0;width:100%;height:100%}
+.photo-plate .rim circle{stroke:var(--bead);stroke-width:2.4;stroke-linecap:round;stroke-dasharray:0 7.8;fill:none}
+.photo-plate img{position:absolute;inset:11%;width:78%;height:78%;border-radius:50%;object-fit:cover}
+.photo-plate .glyph{position:relative;width:44%;height:44%}
+.photo-plate.spinning svg.rim{animation:turn 7s linear infinite}
+.photo-plate.spinning img{animation:breathe 2.4s ease-in-out infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+@keyframes breathe{50%{opacity:.8;transform:scale(.985)}}
+
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field>span,.lbl{font-size:.86rem;color:var(--muted)}
+input[type=text],input[type=number],input[type=password],textarea{background:var(--porcelain);border:1px solid var(--line);border-radius:14px;padding:12px 14px;width:100%;min-width:0;color:var(--ink)}
+textarea{resize:vertical;line-height:1.5}
+input::placeholder,textarea::placeholder{color:var(--muted);opacity:.8}
+
+.loading{align-items:center;text-align:center;padding-block:10px 4px}
+.loading-msg{font-family:var(--f-display);font-size:1.45rem;min-height:1.6em}
+
+/* result */
+.res-head{display:flex;align-items:center;gap:14px}
+.res-thumb{width:74px;height:74px}
+.res-titles{min-width:0}
+.eyebrow{font-size:.8rem;letter-spacing:.05em;color:var(--rose);font-weight:600}
+.dish{font-family:var(--f-display);font-weight:400;font-size:1.8rem;line-height:1.08;margin:2px 0 0}
+.res-total{display:flex;align-items:baseline;gap:8px}
+.res-total .num{font-size:3.4rem;line-height:1}
+.res-total .unit{color:var(--muted)}
+.comp{display:flex;height:8px;gap:3px}
+.comp i{display:block;height:100%;border-radius:8px;background:var(--c);transition:flex-grow .5s}
+.legend{list-style:none;margin:0;padding:0;display:flex;gap:16px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.legend li{display:flex;align-items:center;gap:6px}
+.legend li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.legend b{font-family:var(--f-num);font-weight:500;font-size:1.15rem;color:var(--ink)}
+.balance{display:flex;gap:12px;align-items:baseline;background:var(--rose-wash);border-radius:18px;padding:12px 16px}
+.score{font-size:1.25rem;color:var(--rose);flex:none}
+.score small{font-size:.8rem}
+
+h3.sub{font-family:var(--f-display);font-weight:400;font-size:1.35rem;margin:0}
+.conf-legend{display:flex;gap:10px;font-size:.76rem;color:var(--muted);flex-wrap:wrap;justify-content:flex-end}
+.conf-legend span{display:inline-flex;align-items:center;gap:4px}
+.items{list-style:none;margin:0;padding:0}
+.item{padding:12px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px}
+.it-top{display:flex;align-items:center;gap:10px}
+.it-name{flex:1;min-width:0;font-weight:600}
+.it-kcal{font-size:1.05rem;white-space:nowrap}
+.it-del{width:30px;height:30px;flex:none;border-radius:50%;border:1px solid var(--line);background:none;display:grid;place-items:center;color:var(--muted)}
+.conf{width:10px;height:10px;border-radius:50%;flex:none;border:1.5px solid var(--c);background:transparent}
+.conf[data-c="high"]{--c:var(--celadon);background:var(--c)}
+.conf[data-c="medium"]{--c:var(--apricot);background:linear-gradient(90deg,var(--c) 50%,transparent 50%)}
+.conf[data-c="low"]{--c:var(--rose)}
+.it-sub{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.85rem}
+.it-measure{flex:0 1 38%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it-range{flex:1;min-width:0;display:flex}
+.it-g{flex:none;min-width:52px;text-align:end;font-variant-numeric:tabular-nums;color:var(--ink)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--line);border-radius:2px}
+input[type=range]::-moz-range-track{height:2px;background:var(--line);border-radius:2px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink);margin-top:-9px;box-shadow:var(--shadow)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)}
+
+.inline-form{display:flex;gap:8px;align-items:stretch}
+.inline-form input{flex:1;min-width:0}
+.small-btn{min-height:46px;padding:0 16px;border-radius:14px;border:1px solid var(--ink);background:none;font-weight:600;flex:none;color:var(--ink)}
+.small-btn:disabled{opacity:.45;cursor:default}
+.status{font-size:.84rem;color:var(--muted)}
+.status.err{color:var(--rose)}
+.block{display:flex;flex-direction:column;gap:10px}
+
+.more{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding-block:4px}
+.more summary{cursor:pointer;padding:10px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";font-family:var(--f-num);font-size:1.3rem;color:var(--muted);line-height:1}
+.more[open] summary::after{content:"–"}
+.more-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 10px}
+.more-grid dt{font-size:.8rem;color:var(--muted)}
+.more-grid dd{margin:0;font-family:var(--f-num);font-size:1.2rem}
+.more-grid dd small{font-family:var(--f-body);font-size:.75rem;color:var(--muted)}
+.more .fine{padding-bottom:10px}
+
+fieldset{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:10px}
+legend{padding:0;font-size:.86rem;color:var(--muted);margin-bottom:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-flex;min-height:38px;align-items:center;padding:0 15px;border-radius:999px;border:1px solid var(--line);cursor:pointer;font-size:.92rem;background:var(--paper)}
+.chip input:checked + span{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.chip input:focus-visible + span{outline:2px solid var(--rose);outline-offset:2px}
+
+.text-btn{background:none;border:0;padding:6px 2px;font-weight:600;color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.text-btn.danger{color:var(--rose)}
+.del-row{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;align-items:center;font-size:.92rem}
+
+.set-form{display:flex;flex-direction:column;gap:22px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.danger-zone{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;font-size:.9rem;border-top:1px solid var(--line);padding-top:14px}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:40;background:var(--ink);color:var(--on-ink);padding:11px 18px;border-radius:999px;font-size:.92rem;font-weight:500;max-width:calc(100% - 32px);text-align:center;box-shadow:var(--shadow)}
+
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:18px;counter-reset:s}
+.steps>li{counter-increment:s;display:flex;flex-direction:column;gap:8px;padding-inline-start:42px;position:relative;min-width:0}
+.steps>li::before{content:counter(s);position:absolute;inset-inline-start:0;top:0;width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:var(--rose-wash);display:grid;place-items:center;font-family:var(--f-num);color:var(--rose);font-size:1rem}
+.steps b{font-weight:600}
+.steps .row{display:flex;gap:8px;flex-wrap:wrap}
+.steps .row>*{flex:1 1 140px}
+a.ghost{text-decoration:none}
+.paste-ok{color:var(--celadon);font-weight:600}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+
+<div class="app" dir="rtl" lang="he">
+  <header class="top">
+    <div>
+      <h1 class="wordmark">צלחת</h1>
+      <div class="daynav">
+        <button class="nav-btn" id="prevDay" type="button" aria-label="היום הקודם"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <span id="dateLabel">היום</span>
+        <button class="nav-btn" id="nextDay" type="button" aria-label="היום הבא"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <span class="streak" id="streak" hidden></span>
+    </div>
+    <button class="icon-btn" id="openSettings" type="button" aria-label="הגדרות ויעדים">
+      <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M3 6h14M3 14h14"/></g><circle cx="13" cy="6" r="2.2" fill="var(--paper)" stroke="currentColor" stroke-width="1.5"/><circle cx="7" cy="14" r="2.2" fill="var(--paper)" stroke="currentColor" stroke-width="1.5"/></svg>
+    </button>
+  </header>
+
+  <section class="hero" aria-label="סיכום היום">
+    <div class="plate-wrap">
+      <svg class="plate" viewBox="0 0 260 260" aria-hidden="true">
+        <circle class="beads" cx="130" cy="130" r="118" fill="none"/>
+        <circle class="track" cx="130" cy="130" r="100" fill="none"/>
+        <circle class="progress" id="ring" cx="130" cy="130" r="100" fill="none" transform="rotate(-90 130 130)"/>
+      </svg>
+      <div class="plate-center" role="group" aria-label="קלוריות היום">
+        <span class="eyebrow-s">נאכלו</span>
+        <span class="kcal num" id="kcalEaten">0</span>
+        <span class="kcal-goal" id="kcalGoal">קק״ל</span>
+        <span class="kcal-left" id="kcalLeft"></span>
+      </div>
+    </div>
+    <div class="macros">
+      <div class="macro k-protein"><span class="m-label">חלבון</span><span class="m-val"><b id="m-protein">0</b> / <span id="g-protein">0</span> ג׳</span><span class="bar"><i id="b-protein"></i></span></div>
+      <div class="macro k-carbs"><span class="m-label">פחמימות</span><span class="m-val"><b id="m-carbs">0</b> / <span id="g-carbs">0</span> ג׳</span><span class="bar"><i id="b-carbs"></i></span></div>
+      <div class="macro k-fat"><span class="m-label">שומן</span><span class="m-val"><b id="m-fat">0</b> / <span id="g-fat">0</span> ג׳</span><span class="bar"><i id="b-fat"></i></span></div>
+    </div>
+  </section>
+
+  <section class="capture" id="capture" aria-label="הוספת ארוחה">
+    <button class="cta" id="camBtn" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A1.5 1.5 0 0 1 5.5 7h2.2l1.4-2h5.8l1.4 2h2.2A1.5 1.5 0 0 1 20 8.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 17.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="12.8" r="3.4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      לצלם ארוחה
+    </button>
+    <div class="cta-row">
+      <button class="ghost" id="galBtn" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 16l4.5-4.5 3.5 3.5 2.5-2.5L20 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="15.5" cy="9.5" r="1.4" fill="currentColor"/></svg>
+        מהגלריה
+      </button>
+      <button class="ghost" id="textBtn" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19h4L19 9l-4-4L5 15z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M13 7l4 4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+        לתאר במילים
+      </button>
+    </div>
+    <input type="file" id="camInput" accept="image/*" capture="environment" hidden>
+    <input type="file" id="galInput" accept="image/*" hidden>
+    <p class="engine-note" id="engineNote">מתחברים ל-Claude…</p>
+  </section>
+
+  <section class="capture" id="pastNote" hidden>
+    <button class="ghost" id="backToday" type="button">חזרה להיום</button>
+  </section>
+
+  <section aria-labelledby="mealsTitle">
+    <div class="section-head"><h2 class="sec" id="mealsTitle">ארוחות היום</h2><span class="count" id="mealCount"></span></div>
+    <p class="example-note" id="exampleNote" hidden>אלה ארוחות לדוגמה כדי לראות איך היומן נראה. הן יימחקו מעצמן כשתשמרו ארוחה ראשונה.</p>
+    <ol class="meals" id="meals"></ol>
+    <p class="empty" id="emptyDiary" hidden>עוד לא נרשמו ארוחות ביום הזה.</p>
+  </section>
+
+  <section aria-labelledby="waterTitle">
+    <div class="section-head"><h2 class="sec" id="waterTitle">מים</h2><span class="count" id="waterCount"></span></div>
+    <div class="glasses" id="glasses"></div>
+  </section>
+
+  <p class="foot">הערכים הם הערכה לפי תמונה או תיאור, והם לא תחליף לייעוץ של דיאטנית.</p>
+</div>
+
+<!-- analysis flow -->
+<div class="sheet" id="flow" hidden role="dialog" aria-modal="true" aria-label="ניתוח ארוחה" dir="rtl" lang="he">
+  <div class="sheet-panel" id="flowPanel">
+    <div class="sheet-bar"><span class="grip"></span><button class="icon-btn sm" type="button" data-close aria-label="סגירה"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div>
+
+    <div class="state" id="st-compose">
+      <h2 class="sheet-title" id="composeTitle">מה על הצלחת?</h2>
+      <div id="composePhoto" class="state">
+        <div class="photo-plate"><svg class="rim" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46.5"/></svg><img id="cPhotoImg" alt="התמונה שנבחרה"></div>
+        <label class="field"><span>הערה, לא חובה</span><input type="text" id="cNote" maxlength="200" placeholder="למשל: מטוגן בשמן זית, אכלתי חצי"></label>
+      </div>
+      <div id="composeText" hidden>
+        <label class="field"><span>מה היה בארוחה?</span><textarea id="cDesc" rows="4" maxlength="600" placeholder="למשל: 2 פרוסות לחם מלא עם חומוס, סלט ירקות קטן וקפה הפוך"></textarea></label>
+      </div>
+      <button class="cta" id="analyzeBtn" type="button">לנתח את הצלחת</button>
+      <p class="fine" id="consentHint" hidden>בפעם הראשונה Claude יבקש אישור להשתמש בחשבון שלך. כל ניתוח נספר בשימוש של החשבון הזה.</p>
+    </div>
+
+    <div class="state loading" id="st-loading" hidden>
+      <div class="photo-plate spinning" id="lPlate"><svg class="rim" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="46.5"/></svg><img id="lImg" alt=""></div>
+      <p class="loading-msg" id="loadMsg" aria-live="polite">מזהים מה יש בצלחת</p>
+      <p class="fine">בדרך כלל זה לוקח 10 עד 30 שניות.</p>
+      <button class="ghost" id="stopBtn" type="button">ביטול</button>
+    </div>
+
+    <div class="state" id="st-error" hidden>
+      <h2 class="sheet-title">לא הצלחנו הפעם</h2>
+      <p id="errMsg"></p>
+      <div class="cta-row"><button class="cta" id="retryBtn" type="button">לנסות שוב</button><button class="ghost" id="errBack" type="button">חזרה</button></div>
+      <button class="ghost" id="errSettings" type="button" hidden>לפתוח הגדרות</button>
+    </div>
+
+    <div class="state" id="st-result" hidden>
+      <div class="res-head">
+        <span class="thumb res-thumb" id="rThumb" aria-hidden="true"></span>
+        <div class="res-titles"><p class="eyebrow" id="rTypeLabel"></p><h2 class="dish" id="rDish"></h2></div>
+      </div>
+      <div>
+        <div class="res-total"><span class="num" id="rKcal">0</span><span class="unit">קק״ל</span></div>
+      </div>
+      <div class="comp" aria-hidden="true"><i class="k-protein" id="cP"></i><i class="k-carbs" id="cC"></i><i class="k-fat" id="cF"></i></div>
+      <ul class="legend">
+        <li class="k-protein"><b id="rP">0</b> ג׳ חלבון</li>
+        <li class="k-carbs"><b id="rC">0</b> ג׳ פחמימות</li>
+        <li class="k-fat"><b id="rF">0</b> ג׳ שומן</li>
+      </ul>
+      <p class="balance" id="rBalance"><span class="score num" id="rScore"></span><span id="rNote"></span></p>
+
+      <div class="block">
+        <div class="section-head"><h3 class="sub">מה זיהינו</h3><span class="conf-legend" aria-hidden="true"><span><i class="conf" data-c="high"></i>בטוח</span><span><i class="conf" data-c="medium"></i>סביר</span><span><i class="conf" data-c="low"></i>הערכה</span></span></div>
+        <ul class="items" id="rItems"></ul>
+        <form class="inline-form" id="addForm"><label class="sr" for="addInput">הוספת פריט שלא זוהה</label><input id="addInput" type="text" maxlength="120" placeholder="חסר משהו? למשל: כוס מיץ תפוזים"><button class="small-btn" type="submit">הוספה</button></form>
+        <p class="status" id="addStatus" hidden></p>
+      </div>
+
+      <details class="more">
+        <summary>ערכים נוספים</summary>
+        <dl class="more-grid">
+          <div><dt>סיבים תזונתיים</dt><dd><span id="rFiber">0</span> <small>ג׳</small></dd></div>
+          <div><dt>סוכרים</dt><dd><span id="rSugar">0</span> <small>ג׳</small></dd></div>
+          <div><dt>נתרן</dt><dd><span id="rSodium">0</span> <small>מ״ג</small></dd></div>
+        </dl>
+        <p class="fine" id="rAssume"></p>
+      </details>
+
+      <form class="block" id="fixForm">
+        <label class="lbl" for="fixInput">משהו לא מדויק? כתבו מה לתקן</label>
+        <div class="inline-form"><input id="fixInput" type="text" maxlength="200" placeholder="למשל: זה טופו ולא עוף, והמנה הייתה חצי"><button class="small-btn" type="submit">תיקון</button></div>
+        <p class="status" id="fixStatus" hidden></p>
+      </form>
+
+      <fieldset>
+        <legend>סוג הארוחה</legend>
+        <div class="chips" id="rTypes">
+          <label class="chip"><input type="radio" name="mtype" id="t-breakfast" value="breakfast"><span>בוקר</span></label>
+          <label class="chip"><input type="radio" name="mtype" id="t-lunch" value="lunch"><span>צהריים</span></label>
+          <label class="chip"><input type="radio" name="mtype" id="t-dinner" value="dinner"><span>ערב</span></label>
+          <label class="chip"><input type="radio" name="mtype" id="t-snack" value="snack"><span>נשנוש</span></label>
+        </div>
+      </fieldset>
+
+      <button class="cta" id="saveBtn" type="button">לשמור ביומן</button>
+      <div class="del-row" id="delRow" hidden>
+        <button class="text-btn danger" id="delBtn" type="button">מחיקת הארוחה</button>
+        <span id="delConfirm" hidden>למחוק את הארוחה? <button class="text-btn danger" id="delYes" type="button">כן, למחוק</button> <button class="text-btn" id="delNo" type="button">ביטול</button></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- settings -->
+<div class="sheet" id="settings" hidden role="dialog" aria-modal="true" aria-labelledby="setTitle" dir="rtl" lang="he">
+  <div class="sheet-panel">
+    <div class="sheet-bar"><span class="grip"></span><button class="icon-btn sm" type="button" data-close aria-label="סגירה"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div>
+    <h2 class="sheet-title" id="setTitle">הגדרות</h2>
+    <form id="setForm" class="set-form">
+      <fieldset>
+        <legend>יעד יומי</legend>
+        <div class="grid2">
+          <label class="field"><span>קלוריות</span><input id="gKcal" type="number" inputmode="numeric" min="800" max="6000" step="10"></label>
+          <label class="field"><span>כוסות מים</span><input id="gWater" type="number" inputmode="numeric" min="1" max="16"></label>
+        </div>
+        <div class="grid3">
+          <label class="field"><span>חלבון, ג׳</span><input id="gProtein" type="number" inputmode="numeric" min="0" max="600"></label>
+          <label class="field"><span>פחמימות, ג׳</span><input id="gCarbs" type="number" inputmode="numeric" min="0" max="900"></label>
+          <label class="field"><span>שומן, ג׳</span><input id="gFat" type="number" inputmode="numeric" min="0" max="400"></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>חיבור לניתוח</legend>
+        <p class="fine" id="connText"></p>
+        <details id="keyBlock" hidden class="more"><summary>ניתוח אוטומטי עם מפתח API (לא חובה)</summary><div class="block">
+          <label class="field"><span>מפתח API של Anthropic</span><input id="apiKey" type="password" autocomplete="off" spellcheck="false" dir="ltr" placeholder="sk-ant-…"></label>
+          <p class="fine">המפתח נשמר רק בדפדפן הזה ונשלח רק ל-Anthropic. עם מפתח, הניתוח רץ מיד בלי העתקה והדבקה.</p>
+        </div></details>
+      </fieldset>
+      <button class="cta" type="submit">שמירה</button>
+    </form>
+    <div class="danger-zone">
+      <button class="text-btn danger" id="wipeBtn" type="button">מחיקת כל היומן מהמכשיר</button>
+      <span id="wipeConfirm" hidden>כל הארוחות והמים יימחקו. <button class="text-btn danger" id="wipeYes" type="button">כן, למחוק</button> <button class="text-btn" id="wipeNo" type="button">ביטול</button></span>
+    </div>
+  </div>
+</div>
+
+<!-- paste flow: analysis through the user's own chat -->
+<div class="sheet" id="paste" hidden role="dialog" aria-modal="true" aria-labelledby="pasteTitle" dir="rtl" lang="he">
+  <div class="sheet-panel">
+    <div class="sheet-bar"><span class="grip"></span><button class="icon-btn sm" type="button" data-close aria-label="סגירה"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div>
+    <h2 class="sheet-title" id="pasteTitle">ניתוח בצ׳אט שלך</h2>
+    <p class="fine">האפליקציה מכינה שאלה, והצ׳אט שלך ב-Claude או ב-ChatGPT עושה את הניתוח. זה רץ בחשבון החינמי שלך, בלי מפתח ובלי הרשמה.</p>
+    <ol class="steps">
+      <li><span><b>העתיקו את השאלה</b></span>
+        <button class="ghost" id="pCopy" type="button">העתקת השאלה</button></li>
+      <li id="pImgStep"><span><b>שלחו את התמונה לצ׳אט</b></span>
+        <div class="row"><button class="ghost" id="pShare" type="button">שליחה לצ׳אט</button><a class="ghost" id="pSave" download="meal.jpg" hidden>שמירת התמונה</a></div>
+        <span class="fine">אם אין כפתור שליחה, שמרו את התמונה וצרפו אותה מהגלריה.</span></li>
+      <li><span><b>בצ׳אט: הדביקו את השאלה, צרפו את התמונה ושלחו</b></span>
+        <div class="row"><a class="ghost" href="https://claude.ai/new" target="_blank" rel="noopener">פתיחת Claude</a><a class="ghost" href="https://chatgpt.com/" target="_blank" rel="noopener">פתיחת ChatGPT</a></div></li>
+      <li><span><b>העתיקו את כל התשובה והדביקו כאן</b></span>
+        <label class="field"><span class="sr">התשובה מהצ׳אט</span><textarea id="pAnswer" rows="4" dir="ltr" placeholder="{ ... }"></textarea></label>
+        <button class="ghost" id="pPaste" type="button">הדבקה מהלוח</button></li>
+    </ol>
+    <p class="status err" id="pErr" hidden></p>
+    <button class="cta" id="pGo" type="button">לחשב ערכים</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- basics ---------- */
+const $ = (s, r) => (r || document).querySelector(s);
+const fmt = new Intl.NumberFormat('he-IL', { maximumFractionDigits: 0 });
+const NUTR = ['kcal','protein','carbs','fat','fiber','sugar','sodium'];
+const TYPES = { breakfast:'ארוחת בוקר', lunch:'ארוחת צהריים', dinner:'ארוחת ערב', snack:'נשנוש' };
+const CONF = { high:'זיהוי בטוח', medium:'זיהוי סביר', low:'הערכה בלבד' };
+const DEFAULT_GOALS = { kcal:1900, protein:100, carbs:210, fat:65, water:8 };
+const LS = 'tsalachat.v1';
+const API_MODEL = 'claude-sonnet-5-5';
+const API_MODEL_QUICK = 'claude-haiku-4-5-20251001';
+const PLATE_GLYPH = '<svg class="glyph" viewBox="0 0 52 52" width="30" height="30" aria-hidden="true"><circle cx="26" cy="26" r="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="0 4.1"/><circle cx="26" cy="26" r="10.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>';
+const GLASS_SVG = '<svg viewBox="0 0 32 40" aria-hidden="true"><path class="g-fill" d="M9 17h14l-1.35 16.4a1.8 1.8 0 0 1-1.8 1.6h-7.7a1.8 1.8 0 0 1-1.8-1.6z"/><path class="g-body" stroke-width="1.5" stroke-linejoin="round" d="M6.5 5h19l-2.55 30.2a2 2 0 0 1-2 1.8H11.05a2 2 0 0 1-2-1.8z"/></svg>';
+const X_SVG = '<svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 3l8 8M11 3l-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>';
+
+function h(tag, props, ...kids){
+  const el = document.createElement(tag);
+  if (props) for (const [k, v] of Object.entries(props)){
+    if (v == null || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'text') el.textContent = v;
+    else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const kid of kids.flat()){
+    if (kid == null || kid === false) continue;
+    el.append(kid.nodeType ? kid : document.createTextNode(String(kid)));
+  }
+  return el;
+}
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+const round = n => Math.round(Number(n) || 0);
+const clamp = (n, a, b) => Math.min(b, Math.max(a, n));
+
+/* ---------- storage (this browser only) ---------- */
+function fresh(){ return { v:1, goals:{ ...DEFAULT_GOALS }, days:{}, water:{}, apiKey:'', seeded:false }; }
+function load(){
+  try {
+    const raw = localStorage.getItem(LS);
+    if (raw){
+      const s = JSON.parse(raw);
+      if (s && s.v === 1){
+        s.goals = { ...DEFAULT_GOALS, ...(s.goals || {}) };
+        s.days = s.days || {}; s.water = s.water || {}; s.apiKey = s.apiKey || '';
+        return s;
+      }
+    }
+  } catch (e) {}
+  return fresh();
+}
+let store = load();
+function persist(){
+  try { localStorage.setItem(LS, JSON.stringify(store)); return true; }
+  catch (e) { return false; }
+}
+
+/* ---------- dates ---------- */
+function dkey(d){ return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+function fromKey(k){ const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d); }
+const todayKey = () => dkey(new Date());
+let viewKey = todayKey();
+function guessType(d){
+  const hr = d.getHours();
+  if (hr >= 5 && hr < 11) return 'breakfast';
+  if (hr >= 11 && hr < 16) return 'lunch';
+  if (hr >= 18 && hr < 23) return 'dinner';
+  return 'snack';
+}
+
+/* ---------- nutrition math ---------- */
+function itemVals(it){ const o = {}; for (const k of NUTR) o[k] = (it.per[k] || 0) * it.grams; return o; }
+function sumItems(items){
+  const t = {}; for (const k of NUTR) t[k] = 0;
+  for (const it of items){ const v = itemVals(it); for (const k of NUTR) t[k] += v[k]; }
+  return t;
+}
+function dayMeals(k){ return (store.days[k] || []).slice().sort((a, b) => a.ts - b.ts); }
+function pos(v){ const n = Number(v); return Number.isFinite(n) && n > 0 ? n : 0; }
+function normItem(it){
+  if (!it || typeof it !== 'object') return null;
+  const g = pos(it.grams) || 100;
+  const per = {}; for (const k of NUTR) per[k] = pos(it[k]) / g;
+  return {
+    id: uid(),
+    name: String(it.name || 'פריט').slice(0, 60),
+    measure: String(it.measure || '').slice(0, 60),
+    baseGrams: g, grams: g,
+    conf: ['high','medium','low'].includes(it.confidence) ? it.confidence : 'medium',
+    per
+  };
+}
+function normalizeAnalysis(j){
+  if (!j || typeof j !== 'object' || Array.isArray(j)) throw { code:'invalid_json' };
+  if (j.is_food === false) throw { code:'not_food' };
+  const items = (Array.isArray(j.items) ? j.items : []).map(normItem).filter(Boolean);
+  if (!items.length) throw { code:'not_food' };
+  const b = round(j.balance);
+  return {
+    dish: String(j.dish || 'ארוחה').slice(0, 80),
+    items,
+    balance: b ? clamp(b, 1, 10) : null,
+    note: String(j.note || '').slice(0, 160),
+    assumptions: String(j.assumptions || '').slice(0, 220)
+  };
+}
+
+/* ---------- example day (shown until the first real meal) ---------- */
+function exItem(name, measure, g, kcal, p, c, f, fib, sug, sod, conf){
+  return { id: uid(), name, measure, baseGrams: g, grams: g, conf,
+    per: { kcal: kcal / g, protein: p / g, carbs: c / g, fat: f / g, fiber: fib / g, sugar: sug / g, sodium: sod / g } };
+}
+function seedExamples(){
+  if (store.seeded) return;
+  const hasAny = Object.values(store.days).some(a => a && a.length);
+  if (!hasAny){
+    const k = todayKey(), base = fromKey(k);
+    const at = (hh, mm) => { const x = new Date(base); x.setHours(hh, mm, 0, 0); return x.getTime(); };
+    store.days[k] = [
+      { id: uid(), ts: at(8, 30), type: 'breakfast', example: true, thumb: '', dish: 'שקשוקה ופרוסת מחמצת',
+        balance: 7, note: 'חלבון טוב מהביצים, ורוטב עגבניות שמוסיף ירק לבוקר.', assumptions: 'הנחנו כף שמן זית בבישול.',
+        items: [ exItem('שקשוקה, 2 ביצים', 'מחבת אישית', 250, 290, 16, 14, 19, 3, 8, 620, 'high'),
+                 exItem('לחם מחמצת', 'פרוסה עבה', 60, 150, 5, 29, 1, 2, 1, 300, 'high'),
+                 exItem('טחינה גולמית', 'כף', 15, 90, 3, 3, 8, 1, 0, 5, 'medium') ] },
+      { id: uid(), ts: at(13, 15), type: 'lunch', example: true, thumb: '', dish: 'קערת קינואה ועוף',
+        balance: 8, note: 'שילוב מאוזן של חלבון, דגן מלא וירקות קלויים.', assumptions: 'הנחנו כף רוטב שמן זית ולימון.',
+        items: [ exItem('חזה עוף בגריל', 'כ-4 פרוסות', 120, 198, 37, 0, 4, 0, 0, 90, 'high'),
+                 exItem('קינואה מבושלת', '¾ כוס', 150, 180, 7, 32, 3, 4, 1, 10, 'medium'),
+                 exItem('ירקות קלויים', 'כוס', 120, 70, 2, 11, 3, 4, 6, 40, 'medium'),
+                 exItem('רוטב שמן זית ולימון', 'כף', 15, 100, 0, 1, 11, 0, 0, 60, 'low') ] }
+    ];
+  }
+  store.seeded = true;
+  persist();
+}
+
+/* ---------- Claude engine ----------
+   Inside Claude the page asks Claude on the viewer's own account (the `sample` capability).
+   Opened anywhere else, it falls back to a personal Anthropic API key saved in this browser. */
+let enginePromise = null;
+function getEngine(){
+  if (enginePromise) return enginePromise;
+  enginePromise = (async () => {
+    if (window.claude && typeof window.claude.use === 'function'){
+      try {
+        const s = await window.claude.use('sample');
+        if (s){
+          let lim = null;
+          try { lim = await s.limits(); } catch (e) {}
+          return { kind: 'claude', sample: s, images: !!(lim && lim.images) };
+        }
+      } catch (e) {}
+    }
+    return { kind: 'key', images: true };
+  })();
+  return enginePromise;
+}
+async function ask(prompt, opts){
+  opts = opts || {};
+  const eng = await getEngine();
+  if (eng.kind === 'claude'){
+    if (opts.image && !eng.images) throw { code: 'images_unavailable' };
+    const o = { modelTier: opts.quick ? 'quick' : 'default' };
+    if (opts.signal) o.signal = opts.signal;
+    if (opts.image) o.images = opts.image;
+    return await eng.sample.json(prompt, o);
+  }
+  if (!(store.apiKey || '').trim()) return await askViaPaste(prompt, opts);
+  return await askWithKey(prompt, opts);
+}
+async function askWithKey(prompt, opts){
+  const key = (store.apiKey || '').trim();
+  if (!key) throw { code: 'no_key' };
+  const content = [];
+  if (opts.image){
+    const data = await blobToBase64(opts.image);
+    content.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data } });
+  }
+  content.push({ type: 'text', text: prompt });
+  let res;
+  try {
+    res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST', signal: opts.signal,
+      headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      body: JSON.stringify({ model: opts.quick ? API_MODEL_QUICK : API_MODEL, max_tokens: 2000, messages: [{ role: 'user', content }] })
+    });
+  } catch (e) {
+    if (e && e.name === 'AbortError') throw { code: 'cancelled' };
+    throw { code: 'network' };
+  }
+  if (!res.ok) throw { code: res.status === 401 ? 'bad_key' : res.status === 429 ? 'rate_limited' : 'upstream_error' };
+  const data = await res.json();
+  const text = (data.content || []).filter(c => c.type === 'text').map(c => c.text).join('');
+  return parseLooseJSON(text);
+}
+let pasteJob = null;
+function copyText(t){
+  if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(t);
+  return new Promise((res, rej) => {
+    const ta = h('textarea', { 'aria-hidden': 'true', style: 'position:fixed;opacity:0;top:0' }); ta.value = t;
+    document.body.append(ta); ta.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); ok ? res() : rej(new Error('copy'));
+  });
+}
+function askViaPaste(prompt, opts){
+  return new Promise((resolve, reject) => {
+    if (pasteJob) pasteJob.reject({ code: 'cancelled' });
+    pasteJob = { resolve, reject, prompt, blob: opts && opts.image || null };
+    $('#pAnswer').value = ''; setStatus($('#pErr'), '');
+    const save = $('#pSave');
+    if (save.dataset.url) URL.revokeObjectURL(save.dataset.url);
+    $('#pImgStep').hidden = !pasteJob.blob;
+    if (pasteJob.blob){ const u = URL.createObjectURL(pasteJob.blob); save.href = u; save.dataset.url = u; save.hidden = false; }
+    openSheet($('#paste'));
+  });
+}
+async function pCopy(){
+  if (!pasteJob) return;
+  try { await copyText(pasteJob.prompt); toast('השאלה הועתקה'); }
+  catch (e) { toast('לא הצלחנו להעתיק. סמנו והעתיקו ידנית.'); }
+}
+async function pShare(){
+  if (!pasteJob || !pasteJob.blob) return;
+  const file = new File([pasteJob.blob], 'meal.jpg', { type: 'image/jpeg' });
+  try {
+    if (navigator.canShare && navigator.canShare({ files: [file] })) await navigator.share({ files: [file] });
+    else { $('#pSave').click(); toast('התמונה נשמרה. צרפו אותה בצ׳אט.'); }
+  } catch (e) { /* user closed the share sheet */ }
+}
+async function pPasteClip(){
+  try { $('#pAnswer').value = await navigator.clipboard.readText(); }
+  catch (e) { toast('לא הצלחנו לקרוא מהלוח. לחצו על התיבה והדביקו.'); }
+}
+function pGo(){
+  if (!pasteJob) return;
+  const text = $('#pAnswer').value.trim();
+  if (!text){ $('#pAnswer').focus(); return; }
+  let j;
+  try { j = parseLooseJSON(text); } catch (e) { setStatus($('#pErr'), errMsg({ code: 'bad_paste' }), true); return; }
+  const job = pasteJob; pasteJob = null;
+  closeSheet($('#paste'));
+  job.resolve(j);
+}
+function parseLooseJSON(text){
+  try { return JSON.parse(text); } catch (e) {}
+  const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (fence){ try { return JSON.parse(fence[1]); } catch (e) {} }
+  const a = text.indexOf('{'), b = text.lastIndexOf('}');
+  if (a >= 0 && b > a){ try { return JSON.parse(text.slice(a, b + 1)); } catch (e) {} }
+  throw { code: 'invalid_json' };
+}
+function blobToBase64(blob){
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result).split(',')[1]);
+    r.onerror = reject;
+    r.readAsDataURL(blob);
+  });
+}
+
+const SHAPE = '{"is_food":true,"dish":"...","items":[{"name":"...","measure":"...","grams":0,"kcal":0,"protein":0,"carbs":0,"fat":0,"fiber":0,"sugar":0,"sodium":0,"confidence":"high"}],"balance":7,"note":"...","assumptions":"..."}';
+function analysisPrompt(p){
+  return [
+    'You are an experienced clinical dietitian estimating the nutrition of one meal for a food-diary app used in Israel. The app is in Hebrew.',
+    p.mode === 'photo' ? 'The attached photo shows the meal.' : 'The meal was described in words (Hebrew): """' + p.description + '"""',
+    'Method: (1) list every distinct food and drink, including sauces, spreads, dressings, bread and drinks; (2) estimate each portion in grams from visual cues (a dinner plate is about 26 cm across, a fork about 19 cm, a tablespoon holds about 15 g); (3) include likely hidden cooking oil when food looks fried or sautéed and say so in assumptions; (4) use standard food-composition values (USDA and the Israeli Tzameret database). Use familiar Israeli, Mediterranean and Thai dish names where they fit.',
+    p.note ? 'The user added this note, which takes priority over what you see: """' + p.note + '"""' : '',
+    p.previous ? 'Your earlier analysis, possibly with grams adjusted by the user: ' + p.previous : '',
+    p.correction ? 'The user asks for this correction: """' + p.correction + '""". Return the full corrected analysis.' : '',
+    'Reply with only one JSON object in exactly this shape: ' + SHAPE,
+    'Rules: name, measure, dish, note and assumptions are natural Hebrew. measure is a Hebrew household measure such as "2 כפות" or "פרוסה בינונית". grams, kcal, protein, carbs, fat, fiber and sugar are plain numbers (grams or kcal); sodium is in mg. confidence is "high", "medium" or "low" for how sure you are of the item and its amount. balance is an integer 1-10 for how balanced the plate is. note is one warm, factual Hebrew sentence of at most 14 words, gender-neutral, with no judgement, no diet advice and no exclamation marks. assumptions is one short Hebrew sentence. If there is no food or drink at all, reply {"is_food":false}.'
+  ].filter(Boolean).join('\n\n');
+}
+function itemPrompt(text){
+  return 'Estimate the nutrition of this single food or drink item as eaten, for an Israeli food diary: """' + text + '""". ' +
+    'Reply with only one JSON object: {"name":"Hebrew name","measure":"Hebrew household measure","grams":0,"kcal":0,"protein":0,"carbs":0,"fat":0,"fiber":0,"sugar":0,"sodium":0,"confidence":"medium"}. Numbers are plain; sodium in mg.';
+}
+
+const ERR = {
+  not_granted: 'Claude לא קיבל אישור לנתח. רעננו את הדף ואשרו כשתתבקשו.',
+  sampling_disabled: 'Claude לא זמין בחשבון הזה.',
+  capability_disabled: 'בתצוגה הזו אי אפשר לנתח. פתחו את הקישור באפליקציית Claude או בדפדפן.',
+  rate_limited: 'הגעתם למגבלת השימוש של החשבון כרגע. נסו שוב בעוד כמה דקות.',
+  session_expired: 'צריך להתחבר שוב ל-Claude ואז לנסות שוב.',
+  image_rejected: 'התמונה לא נקלטה. נסו תמונה אחרת, JPG או PNG.',
+  images_unavailable: 'בתצוגה הזו אי אפשר לשלוח תמונות. אפשר לתאר את הארוחה במילים.',
+  refused: 'לא הצלחנו לנתח את זה. נסו תמונה או תיאור אחרים.',
+  invalid_json: 'התשובה חזרה לא שלמה. נסו שוב.',
+  empty_completion: 'לא התקבלה תשובה. נסו שוב.',
+  not_food: 'לא זיהינו אוכל או שתייה. נסו תמונה קרובה וברורה יותר.',
+  no_key: 'כדי לנתח מחוץ ל-Claude צריך מפתח API אישי. מוסיפים אותו בהגדרות.',
+  bad_key: 'מפתח ה-API לא התקבל. בדקו אותו בהגדרות.',
+  network: 'אין חיבור לשרת. בדקו את האינטרנט ונסו שוב.',
+  prompt_too_large: 'התיאור ארוך מדי. נסו לקצר.',
+  cancelled: '',
+  bad_paste: 'התשובה לא נראית כמו תוצאת ניתוח. בדקו שהעתקתם את כל התשובה, מהסוגר הראשון עד האחרון.',
+  upstream_error: 'משהו השתבש בדרך. נסו שוב.'
+};
+const errMsg = e => (e && Object.prototype.hasOwnProperty.call(ERR, e.code)) ? ERR[e.code] : ERR.upstream_error;
+
+/* ---------- images ---------- */
+function loadImage(file){
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const img = new Image();
+    img.onload = () => resolve({ img, url });
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('decode')); };
+    img.src = url;
+  });
+}
+function squareCrop(img, size, q){
+  const c = document.createElement('canvas'); c.width = c.height = size;
+  const w = img.naturalWidth, hh = img.naturalHeight, side = Math.min(w, hh);
+  c.getContext('2d').drawImage(img, (w - side) / 2, (hh - side) / 2, side, side, 0, 0, size, size);
+  return c.toDataURL('image/jpeg', q);
+}
+async function prepareImage(file){
+  const { img, url } = await loadImage(file);
+  try {
+    const w = img.naturalWidth, hh = img.naturalHeight, s = Math.min(1, 1280 / Math.max(w, hh));
+    const c = document.createElement('canvas'); c.width = Math.round(w * s); c.height = Math.round(hh * s);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    const blob = await new Promise((res, rej) => c.toBlob(b => b ? res(b) : rej(new Error('blob')), 'image/jpeg', 0.86));
+    return { blob, preview: squareCrop(img, 600, 0.82), thumb: squareCrop(img, 200, 0.72) };
+  } finally { URL.revokeObjectURL(url); }
+}
+
+/* ---------- toast ---------- */
+let toastTimer = 0;
+function toast(msg){
+  const t = $('#toast'); t.textContent = msg; t.hidden = false;
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => { t.hidden = true; }, 2600);
+}
+
+/* ---------- home ---------- */
+const RING_C = 2 * Math.PI * 100;
+function renderHome(){
+  const meals = dayMeals(viewKey);
+  const t = sumItems(meals.flatMap(m => m.items));
+  const g = store.goals;
+  const isToday = viewKey === todayKey();
+  const d = fromKey(viewKey);
+  $('#dateLabel').textContent = isToday
+    ? 'היום · ' + d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long' })
+    : d.toLocaleDateString('he-IL', { weekday: 'long', day: 'numeric', month: 'long' });
+  $('#nextDay').disabled = isToday;
+
+  const ring = $('#ring');
+  const frac = Math.min(1, t.kcal / (g.kcal || 1));
+  ring.style.strokeDasharray = RING_C;
+  ring.style.strokeDashoffset = RING_C * (1 - frac);
+  ring.style.strokeOpacity = frac > 0 ? 1 : 0;
+  $('#kcalEaten').textContent = fmt.format(round(t.kcal));
+  $('#kcalGoal').textContent = 'קק״ל מתוך ' + fmt.format(g.kcal);
+  const left = g.kcal - round(t.kcal);
+  $('#kcalLeft').textContent = left >= 0 ? 'נותרו ' + fmt.format(left) : 'מעל היעד ב-' + fmt.format(-left);
+
+  for (const k of ['protein', 'carbs', 'fat']){
+    $('#m-' + k).textContent = fmt.format(round(t[k]));
+    $('#g-' + k).textContent = fmt.format(g[k]);
+    $('#b-' + k).style.width = Math.min(100, t[k] / (g[k] || 1) * 100) + '%';
+  }
+
+  $('#capture').hidden = !isToday;
+  $('#pastNote').hidden = isToday;
+  $('#mealsTitle').textContent = isToday ? 'ארוחות היום' : 'ארוחות';
+  $('#meals').replaceChildren(...meals.map(mealRow));
+  $('#emptyDiary').hidden = meals.length > 0;
+  $('#exampleNote').hidden = !meals.some(m => m.example);
+  $('#mealCount').textContent = meals.length === 0 ? '' : meals.length === 1 ? 'ארוחה אחת' : meals.length + ' ארוחות';
+
+  const s = streak();
+  $('#streak').hidden = s < 2;
+  $('#streak').textContent = s + ' ימים ברצף ביומן';
+  renderWater();
+}
+function mealRow(m){
+  const t = sumItems(m.items);
+  const time = new Date(m.ts).toLocaleTimeString('he-IL', { hour: '2-digit', minute: '2-digit' });
+  return h('li', null,
+    h('button', { class: 'meal', type: 'button', onclick: () => openSaved(m.id) },
+      thumbEl(m.thumb, 'thumb'),
+      h('span', { class: 'meal-text' },
+        h('span', { class: 'meal-name', text: m.dish }),
+        h('span', { class: 'meal-meta' }, (TYPES[m.type] || '') + ' · ' + time, m.example ? h('span', { class: 'tag', text: 'דוגמה' }) : null)),
+      h('span', { class: 'meal-kcal' }, h('span', { class: 'num', text: fmt.format(round(t.kcal)) }), h('small', { text: 'קק״ל' }))));
+}
+function thumbEl(src, cls){
+  const s = h('span', { class: cls, 'aria-hidden': 'true' });
+  if (src) s.append(h('img', { src, alt: '' })); else s.innerHTML = PLATE_GLYPH;
+  return s;
+}
+function renderWater(){
+  const n = store.water[viewKey] || 0, goal = store.goals.water;
+  const wrap = $('#glasses'); wrap.replaceChildren();
+  for (let i = 0; i < goal; i++){
+    const b = h('button', { class: 'glass' + (i < n ? ' on' : ''), type: 'button', 'aria-label': (i + 1) + ' כוסות', 'aria-pressed': i < n ? 'true' : 'false' });
+    b.innerHTML = GLASS_SVG;
+    b.addEventListener('click', () => {
+      const cur = store.water[viewKey] || 0;
+      store.water[viewKey] = (i + 1 === cur) ? i : i + 1;
+      persist(); renderWater();
+    });
+    wrap.append(b);
+  }
+  $('#waterCount').textContent = n + ' מתוך ' + goal + ' כוסות';
+}
+function streak(){
+  const has = k => (store.days[k] || []).some(m => !m.example);
+  const d = new Date();
+  if (!has(dkey(d))) d.setDate(d.getDate() - 1);
+  let n = 0;
+  while (has(dkey(d)) && n < 400){ n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+
+/* ---------- engine note ---------- */
+async function updateEngineNote(){
+  const eng = await getEngine();
+  const note = $('#engineNote');
+  note.classList.remove('warn');
+  if (eng.kind === 'claude'){
+    note.textContent = 'כל ניתוח רץ על חשבון Claude האישי שלך';
+    if (!eng.images){
+      $('#camBtn').disabled = true; $('#galBtn').disabled = true;
+      note.textContent = 'בתצוגה הזו אפשר לתאר ארוחה במילים';
+    }
+  } else if (store.apiKey){
+    note.textContent = 'מחובר עם מפתח API אישי';
+  } else {
+    note.textContent = 'הניתוח נעשה בצ׳אט Claude או ChatGPT שלך, בחשבון החינמי';
+  }
+}
+
+/* ---------- sheets ---------- */
+let lastFocus = null;
+function openSheet(el){
+  lastFocus = document.activeElement;
+  el.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function closeSheet(el){
+  el.hidden = true;
+  if (el.id === 'paste' && pasteJob){ const job = pasteJob; pasteJob = null; job.reject({ code: 'cancelled' }); }
+  if (el.id === 'flow' && flow.ctl){ try { flow.ctl.abort(); } catch (e) {} }
+  if (![...document.querySelectorAll('.sheet')].some(s => !s.hidden)) document.body.style.overflow = '';
+  if (lastFocus && lastFocus.focus) lastFocus.focus();
+}
+document.querySelectorAll('.sheet').forEach(sh => {
+  sh.addEventListener('click', e => { if (e.target === sh) closeSheet(sh); });
+  sh.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeSheet(sh)));
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  const open = [...document.querySelectorAll('.sheet')].reverse().find(s => !s.hidden);
+  if (open) closeSheet(open);
+});
+
+/* ---------- analysis flow ---------- */
+const flow = { state: 'compose', ctl: null };
+function setFlowState(s){
+  for (const x of ['compose', 'loading', 'error', 'result']) $('#st-' + x).hidden = x !== s;
+  flow.state = s;
+  $('#flowPanel').scrollTop = 0;
+}
+function resetFlow(extra){
+  Object.assign(flow, { mode: 'photo', image: null, thumb: '', description: '', note: '', analysis: null,
+    editingId: null, ts: 0, date: viewKey, type: guessType(new Date()), ctl: null }, extra || {});
+}
+async function startPhoto(file){
+  if (!file) return;
+  let img;
+  try { img = await prepareImage(file); }
+  catch (e) { toast('לא הצלחנו לפתוח את התמונה. נסו JPG או PNG.'); return; }
+  resetFlow({ mode: 'photo', image: img, thumb: img.thumb });
+  $('#composeTitle').textContent = 'מה על הצלחת?';
+  $('#composePhoto').hidden = false; $('#composeText').hidden = true;
+  $('#cPhotoImg').src = img.preview; $('#cNote').value = '';
+  $('#analyzeBtn').textContent = 'לנתח את הצלחת';
+  await prepConsentHint();
+  setFlowState('compose'); openSheet($('#flow'));
+}
+async function startText(){
+  resetFlow({ mode: 'text' });
+  $('#composeTitle').textContent = 'מה אכלתם?';
+  $('#composePhoto').hidden = true; $('#composeText').hidden = false;
+  $('#cDesc').value = '';
+  $('#analyzeBtn').textContent = 'לחשב ערכים';
+  await prepConsentHint();
+  setFlowState('compose'); openSheet($('#flow'));
+  setTimeout(() => $('#cDesc').focus(), 60);
+}
+let askedOnce = false;
+async function prepConsentHint(){
+  const eng = await getEngine();
+  const paste = eng.kind === 'key' && !(store.apiKey || '').trim();
+  $('#consentHint').hidden = !(eng.kind === 'claude' && !askedOnce);
+  if (paste) $('#analyzeBtn').textContent = flow.mode === 'photo' ? 'להכין שאלה לצ׳אט' : 'להכין שאלה לצ׳אט';
+}
+
+const LOAD_MSGS = ['מזהים מה יש בצלחת', 'מעריכים כמויות', 'מחשבים ערכים תזונתיים', 'עוד רגע'];
+let loadTimer = 0;
+function showLoading(){
+  const img = $('#lImg'), plate = $('#lPlate');
+  plate.querySelector('.glyph')?.remove();
+  if (flow.image){ img.hidden = false; img.src = flow.image.preview; }
+  else { img.hidden = true; plate.insertAdjacentHTML('beforeend', PLATE_GLYPH); }
+  let i = 0;
+  $('#loadMsg').textContent = flow.mode === 'photo' ? LOAD_MSGS[0] : 'מחשבים ערכים תזונתיים';
+  clearInterval(loadTimer);
+  loadTimer = setInterval(() => { i = Math.min(i + 1, LOAD_MSGS.length - 1); $('#loadMsg').textContent = LOAD_MSGS[i]; }, 3200);
+  setFlowState('loading');
+}
+function showError(e){
+  $('#errMsg').textContent = errMsg(e);
+  $('#errSettings').hidden = !(e && (e.code === 'no_key' || e.code === 'bad_key'));
+  setFlowState('error');
+}
+async function analyze(){
+  const note = $('#cNote').value.trim();
+  const desc = $('#cDesc').value.trim();
+  if (flow.mode === 'text' && desc.length < 2){ $('#cDesc').focus(); return; }
+  flow.note = note; flow.description = desc;
+  const ctl = new AbortController(); flow.ctl = ctl;
+  const eng = await getEngine();
+  if (eng.kind === 'claude' || (store.apiKey || '').trim()) showLoading();
+  askedOnce = true;
+  try {
+    const j = await ask(analysisPrompt({ mode: flow.mode, note, description: desc }),
+      { image: flow.mode === 'photo' ? flow.image.blob : null, signal: ctl.signal });
+    if (flow.ctl !== ctl) return;
+    flow.analysis = normalizeAnalysis(j);
+    flow.analysis.type = flow.type;
+    showResult();
+  } catch (e) {
+    if (flow.ctl !== ctl) return;
+    if (e && e.code === 'cancelled'){ setFlowState('compose'); return; }
+    showError(e);
+  } finally {
+    clearInterval(loadTimer);
+    if (flow.ctl === ctl) flow.ctl = null;
+  }
+}
+
+function showResult(){
+  const a = flow.analysis;
+  const th = $('#rThumb'); th.replaceChildren();
+  if (flow.thumb) th.append(h('img', { src: flow.thumb, alt: '' })); else th.innerHTML = PLATE_GLYPH;
+  $('#rDish').textContent = a.dish;
+  $('#rTypeLabel').textContent = TYPES[a.type] || '';
+  const radio = $('#t-' + a.type); if (radio) radio.checked = true;
+  if (a.balance){
+    $('#rBalance').hidden = false;
+    $('#rScore').replaceChildren(document.createTextNode(String(a.balance)), h('small', { text: '/10' }));
+    $('#rNote').textContent = a.note || 'ציון האיזון של הצלחת';
+  } else $('#rBalance').hidden = true;
+  $('#rAssume').textContent = a.assumptions ? 'הנחות: ' + a.assumptions : '';
+  $('#addInput').value = ''; $('#fixInput').value = '';
+  $('#addStatus').hidden = true; $('#fixStatus').hidden = true;
+  $('#saveBtn').textContent = flow.editingId ? 'לשמור שינויים' : 'לשמור ביומן';
+  $('#delRow').hidden = !flow.editingId; $('#delConfirm').hidden = true; $('#delBtn').hidden = false;
+  renderItems(); renderTotals();
+  setFlowState('result');
+}
+function renderItems(){
+  $('#rItems').replaceChildren(...flow.analysis.items.map(itemRow));
+}
+function itemRow(it){
+  const kcalEl = h('span', { class: 'it-kcal num' });
+  const out = h('output', { class: 'it-g' });
+  const max = Math.max(Math.round(it.baseGrams * 2.5), Math.round(it.baseGrams) + 60, 50);
+  const step = it.baseGrams <= 60 ? 5 : 10;
+  const range = h('input', { type: 'range', min: '0', max: String(max), step: String(step), value: String(Math.round(it.grams)), id: 'r-' + it.id, 'aria-label': 'כמות ' + it.name + ' בגרמים' });
+  const upd = () => {
+    kcalEl.textContent = fmt.format(round(itemVals(it).kcal)) + ' קק״ל';
+    out.textContent = fmt.format(round(it.grams)) + ' ג׳';
+  };
+  range.addEventListener('input', () => { it.grams = Number(range.value); upd(); renderTotals(); });
+  upd();
+  const del = h('button', { type: 'button', class: 'it-del', 'aria-label': 'להסיר את ' + it.name,
+    onclick: () => { flow.analysis.items = flow.analysis.items.filter(x => x !== it); renderItems(); renderTotals(); } });
+  del.innerHTML = X_SVG;
+  return h('li', { class: 'item' },
+    h('div', { class: 'it-top' },
+      h('span', { class: 'conf', 'data-c': it.conf, role: 'img', 'aria-label': CONF[it.conf], title: CONF[it.conf] }),
+      h('span', { class: 'it-name', text: it.name }), kcalEl, del),
+    h('div', { class: 'it-sub' }, h('span', { class: 'it-measure', text: it.measure || '' }), h('div', { class: 'it-range' }, range), out));
+}
+function renderTotals(){
+  const t = sumItems(flow.analysis.items);
+  $('#rKcal').textContent = fmt.format(round(t.kcal));
+  $('#rP').textContent = fmt.format(round(t.protein));
+  $('#rC').textContent = fmt.format(round(t.carbs));
+  $('#rF').textContent = fmt.format(round(t.fat));
+  const p = t.protein * 4, c = t.carbs * 4, f = t.fat * 9, sum = p + c + f;
+  $('#cP').style.flex = (sum ? p / sum : 1) + ' 1 0';
+  $('#cC').style.flex = (sum ? c / sum : 1) + ' 1 0';
+  $('#cF').style.flex = (sum ? f / sum : 1) + ' 1 0';
+  $('#rFiber').textContent = fmt.format(round(t.fiber));
+  $('#rSugar').textContent = fmt.format(round(t.sugar));
+  $('#rSodium').textContent = fmt.format(round(t.sodium));
+  $('#saveBtn').disabled = flow.analysis.items.length === 0;
+}
+function setBusy(form, busy){
+  form.querySelectorAll('input,button').forEach(el => { el.disabled = busy; });
+}
+function setStatus(el, msg, isErr){
+  el.textContent = msg; el.hidden = !msg; el.classList.toggle('err', !!isErr);
+}
+async function addItem(e){
+  e.preventDefault();
+  const form = $('#addForm'), inp = $('#addInput'), st = $('#addStatus');
+  const text = inp.value.trim(); if (!text) return;
+  setBusy(form, true); setStatus(st, 'מחשבים את ' + text + '…');
+  try {
+    const j = await ask(itemPrompt(text), { quick: true });
+    const raw = Array.isArray(j) ? j[0] : (j && Array.isArray(j.items) ? j.items[0] : j);
+    const it = normItem(raw);
+    if (!it) throw { code: 'invalid_json' };
+    flow.analysis.items.push(it);
+    renderItems(); renderTotals();
+    inp.value = ''; setStatus(st, '');
+  } catch (err) {
+    setStatus(st, errMsg(err), true);
+  } finally { setBusy(form, false); }
+}
+async function fixAnalysis(e){
+  e.preventDefault();
+  const form = $('#fixForm'), inp = $('#fixInput'), st = $('#fixStatus');
+  const text = inp.value.trim(); if (!text) return;
+  const a = flow.analysis;
+  const previous = JSON.stringify({ dish: a.dish, items: a.items.map(it => {
+    const v = itemVals(it);
+    return { name: it.name, measure: it.measure, grams: round(it.grams), kcal: round(v.kcal), protein: round(v.protein), carbs: round(v.carbs), fat: round(v.fat) };
+  }) });
+  setBusy(form, true); setStatus(st, 'מתקנים…');
+  try {
+    const usePhoto = !!(flow.image && flow.image.blob);
+    const j = await ask(analysisPrompt({ mode: usePhoto ? 'photo' : 'text', note: flow.note,
+      description: flow.description || a.dish, previous, correction: text }), { image: usePhoto ? flow.image.blob : null });
+    const na = normalizeAnalysis(j);
+    na.type = a.type;
+    flow.analysis = na;
+    showResult();
+    toast('הניתוח עודכן');
+  } catch (err) {
+    setStatus(st, errMsg(err), true);
+  } finally { setBusy(form, false); }
+}
+function saveMeal(){
+  const a = flow.analysis; if (!a || !a.items.length) return;
+  const k = flow.date || viewKey;
+  const meal = {
+    id: flow.editingId || uid(),
+    ts: flow.ts || (k === todayKey() ? Date.now() : fromKey(k).setHours(12, 0, 0, 0)),
+    type: a.type, dish: a.dish,
+    items: a.items.map(it => ({ ...it, per: { ...it.per } })),
+    balance: a.balance, note: a.note, assumptions: a.assumptions,
+    thumb: flow.thumb || ''
+  };
+  for (const dk of Object.keys(store.days)) store.days[dk] = store.days[dk].filter(m => !m.example || m.id === meal.id);
+  const list = store.days[k] || (store.days[k] = []);
+  const i = list.findIndex(m => m.id === meal.id);
+  if (i >= 0) list[i] = meal; else list.push(meal);
+  const ok = persist();
+  const wasEdit = !!flow.editingId;
+  closeSheet($('#flow'));
+  renderHome();
+  toast(!ok ? 'נשמר עד שהדף ייסגר. הדפדפן הזה לא מאפשר שמירה קבועה.' : wasEdit ? 'השינויים נשמרו' : 'נשמר ביומן');
+}
+function openSaved(id){
+  const m = (store.days[viewKey] || []).find(x => x.id === id);
+  if (!m) return;
+  resetFlow({ mode: 'view', thumb: m.thumb || '', editingId: m.id, ts: m.ts, date: viewKey, description: m.dish,
+    analysis: { dish: m.dish, items: m.items.map(it => ({ ...it, id: uid(), per: { ...it.per } })), balance: m.balance,
+      note: m.note, assumptions: m.assumptions, type: m.type } });
+  showResult();
+  openSheet($('#flow'));
+}
+function deleteMeal(){
+  const k = flow.date || viewKey;
+  store.days[k] = (store.days[k] || []).filter(m => m.id !== flow.editingId);
+  persist();
+  closeSheet($('#flow'));
+  renderHome();
+  toast('הארוחה נמחקה');
+}
+
+/* ---------- settings ---------- */
+async function openSettings(){
+  const g = store.goals;
+  $('#gKcal').value = g.kcal; $('#gWater').value = g.water;
+  $('#gProtein').value = g.protein; $('#gCarbs').value = g.carbs; $('#gFat').value = g.fat;
+  $('#wipeConfirm').hidden = true; $('#wipeBtn').hidden = false;
+  const eng = await getEngine();
+  if (eng.kind === 'claude'){
+    $('#connText').textContent = 'הניתוח רץ דרך חשבון Claude של מי שמשתמש באפליקציה. בפעם הראשונה Claude מבקש אישור, ומאז כל ניתוח נספר בשימוש של החשבון הזה. אין צורך במפתח.';
+    $('#keyBlock').hidden = true;
+  } else {
+    $('#connText').textContent = 'כל ניתוח נעשה בצ׳אט Claude או ChatGPT שלך: האפליקציה מכינה שאלה, אתם שולחים אותה עם התמונה ומדביקים את התשובה. אין צורך במפתח או בחשבון נוסף.';
+    $('#keyBlock').hidden = false;
+    $('#apiKey').value = store.apiKey || '';
+  }
+  openSheet($('#settings'));
+}
+function saveSettings(e){
+  e.preventDefault();
+  const n = (id, lo, hi, fb) => { const v = Math.round(Number($(id).value)); return Number.isFinite(v) && v >= lo && v <= hi ? v : fb; };
+  const g = store.goals;
+  store.goals = {
+    kcal: n('#gKcal', 800, 6000, g.kcal), water: n('#gWater', 1, 16, g.water),
+    protein: n('#gProtein', 0, 600, g.protein), carbs: n('#gCarbs', 0, 900, g.carbs), fat: n('#gFat', 0, 400, g.fat)
+  };
+  if (!$('#keyBlock').hidden) store.apiKey = $('#apiKey').value.trim();
+  const ok = persist();
+  closeSheet($('#settings'));
+  renderHome(); updateEngineNote();
+  toast(ok ? 'ההגדרות נשמרו' : 'נשמר עד שהדף ייסגר');
+}
+
+/* ---------- wiring ---------- */
+$('#camBtn').addEventListener('click', () => $('#camInput').click());
+$('#galBtn').addEventListener('click', () => $('#galInput').click());
+for (const id of ['#camInput', '#galInput']){
+  $(id).addEventListener('change', e => { const f = e.target.files && e.target.files[0]; e.target.value = ''; startPhoto(f); });
+}
+$('#textBtn').addEventListener('click', startText);
+$('#analyzeBtn').addEventListener('click', analyze);
+$('#cDesc').addEventListener('keydown', e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) analyze(); });
+$('#cNote').addEventListener('keydown', e => { if (e.key === 'Enter'){ e.preventDefault(); analyze(); } });
+$('#stopBtn').addEventListener('click', () => { if (flow.ctl) flow.ctl.abort(); });
+$('#retryBtn').addEventListener('click', analyze);
+$('#errBack').addEventListener('click', () => setFlowState('compose'));
+$('#errSettings').addEventListener('click', () => { closeSheet($('#flow')); openSettings(); });
+$('#addForm').addEventListener('submit', addItem);
+$('#fixForm').addEventListener('submit', fixAnalysis);
+$('#rTypes').addEventListener('change', e => { if (flow.analysis){ flow.analysis.type = e.target.value; $('#rTypeLabel').textContent = TYPES[e.target.value]; } });
+$('#saveBtn').addEventListener('click', saveMeal);
+$('#pCopy').addEventListener('click', pCopy);
+$('#pShare').addEventListener('click', pShare);
+$('#pPaste').addEventListener('click', pPasteClip);
+$('#pGo').addEventListener('click', pGo);
+$('#delBtn').addEventListener('click', () => { $('#delBtn').hidden = true; $('#delConfirm').hidden = false; });
+$('#delNo').addEventListener('click', () => { $('#delBtn').hidden = false; $('#delConfirm').hidden = true; });
+$('#delYes').addEventListener('click', deleteMeal);
+$('#openSettings').addEventListener('click', openSettings);
+$('#setForm').addEventListener('submit', saveSettings);
+$('#wipeBtn').addEventListener('click', () => { $('#wipeBtn').hidden = true; $('#wipeConfirm').hidden = false; });
+$('#wipeNo').addEventListener('click', () => { $('#wipeBtn').hidden = false; $('#wipeConfirm').hidden = true; });
+$('#wipeYes').addEventListener('click', () => {
+  store.days = {}; store.water = {}; persist();
+  closeSheet($('#settings')); viewKey = todayKey(); renderHome(); toast('היומן נמחק');
+});
+$('#prevDay').addEventListener('click', () => { const d = fromKey(viewKey); d.setDate(d.getDate() - 1); viewKey = dkey(d); renderHome(); });
+$('#nextDay').addEventListener('click', () => { const d = fromKey(viewKey); d.setDate(d.getDate() + 1); const k = dkey(d); viewKey = k > todayKey() ? todayKey() : k; renderHome(); });
+$('#backToday').addEventListener('click', () => { viewKey = todayKey(); renderHome(); });
+
+seedExamples();
+renderHome();
+updateEngineNote();
+})();
+</script>
+
+</body>
+</html>
